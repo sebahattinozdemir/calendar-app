@@ -1,0 +1,32 @@
+<div class="calendar-container" >
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="previousMonth()">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <span>{{ selectedDate | date: 'MMMM yyyy' }}</span>
+      <button mat-icon-button (click)="nextMonth()">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="openAddEventDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-toolbar>
+  
+    <div class="calendar">
+      <div class="calendar-header">
+        <div class="calendar-cell" *ngFor="let day of weekDays">{{ day }}</div>
+      </div>
+      <div class="calendar-body">
+        <div class="calendar-cell" *ngFor="let day of days">
+          <div class="date">{{ day.date | date: 'd' }}</div>
+          <div *ngFor="let event of day.events">
+            <div class="event" cdkDrag (cdkDragEnded)="onEventMoved($event)">
+              {{ event.title }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
